@@ -66,5 +66,20 @@
       . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
       . . .
     </div>
+    <script>
+        field.onclick = function(event){
+            const fieldCoords = this.getBoundingClientRect();
+            // position of the ball is relative to the field 
+            // ball (position: absolute), field (position:relative)
+
+            let ballCoords = {
+                top : event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
+                left : event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2,
+                
+            }
+        }
+
+
+    </script>
   </body>
 </html>
