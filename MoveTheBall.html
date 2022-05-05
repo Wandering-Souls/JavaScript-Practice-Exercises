@@ -12,33 +12,32 @@
         padding: 10px;
         cursor: pointer;
         position: relative;
-        
       }
 
       #ball {
-          position: absolute;
-          left:0;
-          top:0;
-          width: 60px;
-          height:60px;
-          transition: all 1s;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        transition: all 1s;
       }
-       
+
       body {
-          display: flex;
-  justify-content: center;
-       height: 2000px;
-       width: 800px;
+        display: flex;
+        justify-content: center;
+        height: 2000px;
+        width: 800px;
       }
     </style>
   </head>
 
-  <body >
+  <body>
     Click on a field to move the ball there.
     <br />
     The ball should never leave the field.
     <br />
- 
+
     <div id="field">
       <img src="https://en.js.cx/clipart/ball.svg" id="ball" /> . . . . . . . .
       . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -67,19 +66,26 @@
       . . .
     </div>
     <script>
-        field.onclick = function(event){
-            const fieldCoords = this.getBoundingClientRect();
-            // position of the ball is relative to the field 
-            // ball (position: absolute), field (position:relative)
+      field.onclick = function(event){
+          const fieldCoords = this.getBoundingClientRect();
+          // position of the ball is relative to the field
+          // ball (position: absolute), field (position:relative)
 
-            let ballCoords = {
-                top : event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
-                left : event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2,
-                
-            }
-        }
+          let ballCoords = {
+              top : event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
+              left : event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2,
+            };
+             //prevent ball from crossing top border of the field
+             if(ballCoords.top < 0){ballCoords.top === 0;}
 
-
+             //prevent ball from crossing left border of the field
+             if(ballCoords.left < 0){ballCoords.left === 0;}
+             //prevent ball from crossing bottom border of the field
+             if(ballCoords.top + ball.clientHeight > field.clientHeight){ballCoords.top = field.clientHeight - ball.clientHeight;}
+             //prevent ball from crossing right border of the field
+             if(ballCoords.left + ball.clientWidth > field.clientWidth){ballCoords.left = field.clientWidth - ball.clientWidth;}
+          }
+      
     </script>
   </body>
 </html>
